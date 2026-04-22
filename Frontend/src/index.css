@@ -3,6 +3,8 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+#lovable-badge { display: none !important; }
+
 
 /* FinTech Design System — Deep Navy, Slate, Action Blue */
 
