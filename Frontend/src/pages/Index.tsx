@@ -5,7 +5,7 @@ import { AnalyzingOverlay } from "@/components/AnalyzingOverlay";
 import { ResultCard } from "@/components/ResultCard";
 import { toast } from "sonner";
 
-const API_URL = "https://loanapi-8vm3.onrender.com/api/predict";
+const API_URL = "https://loanapi-8vm3.onrender.com";
 
 const Index = () => {
   const [loading, setLoading] = useState(false);
