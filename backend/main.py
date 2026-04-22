@@ -21,7 +21,7 @@ async def get_prediction(payload: dict):
   
         input_data = payload.get("data", [])
         df = pd.DataFrame(input_data)
-        
+        df = df.apply(pd.to_numeric, errors='coerce')
         predictions = model.predict(df)
         
         result = int(predictions[0])
