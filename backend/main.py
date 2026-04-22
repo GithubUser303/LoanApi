@@ -13,7 +13,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-model = joblib.load('loan_recommendation_model')
+model = joblib.load('loan_recommendation_model.pkl')
 
 @app.post("/api/predict")
 async def get_prediction(payload: dict):
