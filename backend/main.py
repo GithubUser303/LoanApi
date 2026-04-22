@@ -15,26 +15,29 @@ app.add_middleware(
 
 model = joblib.load('loan_recommendation_model.pkl')
 
+# 1. Define the EXACT order from your Colab training
+COLUMNS = [
+    'age', 'campaign', 'pdays', 'previous', 'emp_var_rate', 
+    'cons_price_idx', 'cons_conf_idx', 'euribor3m', 'nr_employed'
+]
+
 @app.post("/api/predict")
 async def get_prediction(payload: dict):
     try:
+        # Get data from Lovable
         input_data = payload.get("data", [])
         df = pd.DataFrame(input_data)
         
-        # Force numeric types
+        # Ensure all columns are present and numeric
         df = df.apply(pd.to_numeric, errors='coerce')
         
-        # MANDATORY: List your columns in the EXACT order 
-        # they appeared in your Colab training dataframe
-        column_order = [
-            'age', 'campaign', 'pdays', 'previous', 'emp_var_rate', 
-            'cons_price_idx', 'cons_conf_idx', 'euribor3m', 'nr_employed'
-        ]
+        # REORDER columns to match the model's training exactly
+        df = df[COLUMNS]
         
-        # This reorders the frontend data to match the model's brain
-        df = df[column_order]
-
+        # Predict
         prediction = model.predict(df)
         return {"prediction": int(prediction[0])}
+        
     except Exception as e:
+        print(f"Prediction Error: {e}")
         return {"error": str(e)}
