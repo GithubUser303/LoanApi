@@ -209,3 +209,16 @@
 .animate-float { animation: float 4s ease-in-out infinite; }
 .animate-fade-up { animation: fade-up 0.6s var(--transition-smooth) both; }
 .animate-scale-in { animation: scale-in 0.5s var(--transition-smooth) both; }
+  
+ /* THE NUCLEAR OPTION: This hides the Lovable floating button and banner */
+.fixed.bottom-4.right-4, 
+.lovable-badge, 
+#lovable-badge,
+a[href*="lovable.dev"], 
+a[href*="gptengineer.app"] {
+    display: none !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+    z-index: -9999 !important;
+}
